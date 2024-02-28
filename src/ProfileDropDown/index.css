@@ -1,0 +1,8 @@
+.profile-menu {
+    z-index: 20000 !important;
+}
+
+.logout-text {
+    padding-left: 10px;
+    color: red;
+}
