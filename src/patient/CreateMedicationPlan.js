@@ -48,7 +48,10 @@ const MedicationPlanCreation = ({therapy}) => {
     try {
         medicationPlan.medications = medicationSessions;
         medicationPlan.therapy = therapy;
-        const response = await fetch(`http://localhost:8000/api/create-medication/`, {
+       
+        const response = await fetch(` https://mental-app-backend.onrender.com/api/create-medication/`, {
+
+        // const response = await fetch(`http://localhost:8000/api/create-medication/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
