@@ -149,9 +149,11 @@ const PatientUpdatesPage = () => {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           minWidth: '90%',
+          maxHeight: '80%',
           bgcolor: 'background.paper',
           border: '2px solid #000',
           boxShadow: 24,
+          overflowY: 'auto', 
           p: 4,
         }}>
           {selectedTherapy && <TherapySession session={selectedTherapy} />}

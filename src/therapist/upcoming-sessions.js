@@ -104,7 +104,6 @@ const UpcomingSessionsPage = () => {
             p: 4,
           }}
         >
-          {/* Pass selectedTherapy to MedicationPlanCreation component */}
           {selectedTherapy && (
             <div>
               {/* <Typography variant="h3" gutterBottom>

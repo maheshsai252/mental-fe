@@ -43,7 +43,7 @@ const PatientHomepage = ({patient}) => {
       Sessions
     </Button>
     <Button style={{border: '2px solid black', borderRadius: '10px', margin: '10px'}} color="primary" fullWidth component={Link} to="/patient-log-mood">
-      Log Mood
+      Log Health
     </Button>
     </div>
     

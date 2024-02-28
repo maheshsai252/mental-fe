@@ -36,12 +36,12 @@ const DoctorHomepage = () => {
         
     </Typography>
     <Typography variant="h4" gutterBottom style={{ fontFamily: 'cursive', fontWeight: 'bold' }}>
-        You have 4 appointments left to complete today
+        You have 2 appointments left to complete today
     </Typography>
 
     <div style={{ display: 'flex', justifyContent: 'space-between'}}>
     
-        <Button style={{border: '2px solid black', borderRadius: '10px', margin: '10px'}} color="primary" fullWidth  component={Link} to="/upcoming-sessions">
+        <Button style={{border: '2px solid black', borderRadius: '10px', margin: '10px'}} color="primary" fullWidth  component={Link} to="/doc-sessions">
            Sessions
         </Button>
         <Button style={{border: '2px solid black', borderRadius: '10px', margin: '10px'}} color="primary" fullWidth component={Link} to="/patient-updates">

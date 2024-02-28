@@ -18,7 +18,7 @@ const UpcomingAppointmentsPage = () => {
     useEffect(() => {
       const fetchSessions = async () => {
         try {
-          const response = await axiosRequest.get(`${API_BASE}/doc-therapy-sessions/`);
+          const response = await axiosRequest.get(`${API_BASE}/patient-therapy-sessions/`);
           console.log(response.data);
           setSessions(response.data);
         } catch (error) {

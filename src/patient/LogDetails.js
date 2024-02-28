@@ -17,14 +17,16 @@ import {
 import './index.css';
 import { axiosRequest } from '../services/utils/axios';
 import { API_BASE } from '../Constants';
-
+import { useNavigate } from 'react-router-dom';
 const MedicationForm = ({ plan }) => {
   const [medications, setMedications] = useState(plan.medications);
   const [questions, setQuestions] = useState([
-    'How often do you take this medication?',
     'Have you experienced any side effects?',
+    'Did you feel better after taking medications?',
+    'How often do you take this medication?',
     // Add more questions as needed
   ]);
+  const navigate = useNavigate();
   const [currentMedicationIndex, setCurrentMedicationIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [medicationAnswers, setMedicationAnswers] = useState({});
@@ -96,6 +98,7 @@ const MedicationForm = ({ plan }) => {
       }));
 
       console.log(response);
+      navigate('/');
     } catch (error) {
       console.error('Error occurred while sending form data:', error);
     }
@@ -138,6 +141,7 @@ const MedicationForm = ({ plan }) => {
                   label="Answer"
                   variant="outlined"
                   fullWidth
+                  style={{marginTop: '20px'}}
                   value={questionAnswers[currentQuestionIndex]?.answer || ''}
                   onChange={handleTextAnswerChange}
                 />

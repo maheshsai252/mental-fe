@@ -64,7 +64,7 @@ const Mental = () => {
                 element={<Register setIsAuthenticated={setIsAuthenticated} />}
               />
             <Route
-                path="/upcoming-sessions"
+                path="/doc-sessions"
                 element={
                     <div>
                         <NavbarComponent />

@@ -108,15 +108,20 @@ const TherapySession = ({ session }) => {
     <div>
       {/* <button onClick={onBackButtonClick}>Back</button> */}
       <h3>Therapy Session</h3>
-      <p>Date: {session.session_date}</p>
+      <p>Date: {new Date(session.session_date).toLocaleString()}</p>
       <h4>Medication Plan</h4>
       <ul>
         {session.medication_plan.map((medPlan) => (
           <MedicationPlan plan={medPlan} />
         ))}
       </ul>
-      <p>Therapist Transcription: {session.therapist_transcription}</p>
-      <p>Patient Transcription: {session.patient_transcription}</p>
+      {session.therapist_transcription && (
+        <p>Transcription: {session.therapist_transcription}</p>
+      )}
+      {session.therapist_summary && (
+        <p>Summary: {session.therapist_summary}</p>
+      )}
+      {/* <p>Patient Transcription: {session.patient_transcription}</p> */}
     </div>
   );
 };

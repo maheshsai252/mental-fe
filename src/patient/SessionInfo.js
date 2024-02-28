@@ -15,7 +15,15 @@ const SessionInfo = ({ session }) => (
       <div style={{ display: 'flex',  justifyContent: 'center', alignItems: 'center', marginBottom: '10px' }}>
         <PersonIcon style={{ marginRight: '7px' }} />
         <Typography variant="h5" color="textPrimary">
-        {session.patient?.username}
+        {session.patient?.username || session.user?.username}
+        </Typography>
+        <div style={{padding: '1rem'}}>
+            <strong> treated by  </strong>
+        </div>
+        
+        <PersonIcon style={{ marginRight: '7px' }} />
+        <Typography variant="h5" color="textPrimary">
+        {session.therapist?.username}
         </Typography>
       </div>
       <div style={{ display: 'flex', alignItems: 'flex-start' }}>
@@ -27,7 +35,7 @@ const SessionInfo = ({ session }) => (
         <div style={{ marginLeft:'1rem', display: 'flex', alignItems: 'flex-start', marginTop: '5px' }}>
         <EventIcon style={{ marginRight: '5px' }} />
         <Typography variant="body2" color="textSecondary">
-          {new Date(session.session_date).toLocaleString(undefined, options)}
+          {new Date(session.session_date || session.start_date ).toLocaleString(undefined, options)}
         </Typography>
       </div>
       </div>

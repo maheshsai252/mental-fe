@@ -29,7 +29,18 @@ const MedicationPlan = ({ plan, setSelectedPlan }) => {
 
     fetchMedicationLogs();
   }, [plan.id]);
+  const renderContentWithLineBreaks = ({qa}) => {
+    console.log(qa)
+    if (qa) {
+      // Split the string into an array of lines based on '\n'
+    const contentWithLineBreaks = qa.replace(/\n/g, '<br />');
+    console.log(contentWithLineBreaks);
+    // Render the content with line breaks using dangerouslySetInnerHTML
+    return <div dangerouslySetInnerHTML={{ __html: contentWithLineBreaks }} />;
+    }
 
+    return null;
+  };
   return (
     <Paper style={{ padding: "16px", maxWidth: "100%", margin: "auto" }}>
       <Typography variant="h5" gutterBottom>
@@ -53,20 +64,25 @@ const MedicationPlan = ({ plan, setSelectedPlan }) => {
           </ListItem>
         ))}
       </List>
-      <Typography variant="h5" gutterBottom>
-        Mood Logs for Medication Plan ID: {plan.id}
-      </Typography>
-      <List>
-        {medicationLogs.map((moodLog) => (
-          <ListItem key={moodLog.id}>
-            <div>
-              <Typography variant="body1">QA: {moodLog.qa}</Typography>
-              <Typography variant="body1">Medication Followed: {moodLog.medication_followed}</Typography>
-              {/* Add more details based on your model */}
-            </div>
-          </ListItem>
-        ))}
-      </List>
+      {medicationLogs.length >0 && (
+        <div>
+            <Typography variant="h5" gutterBottom>
+                Health Logs
+            </Typography>
+            <List>
+                {medicationLogs.map((moodLog) => (
+                <ListItem key={moodLog.id}>
+                    <div>
+                    <Typography variant="body1">QA:<br/> {renderContentWithLineBreaks({qa:moodLog.qa})}</Typography>
+                    <Typography variant="body1">Medication Followed: {moodLog.medication_followed}</Typography>
+                    {/* Add more details based on your model */}
+                    </div>
+                </ListItem>
+                ))}
+            </List>
+        </div>
+      )}
+      
     </Paper>
   );
 };
@@ -81,16 +97,16 @@ const Medication = ({ medication }) => {
         </ListItemIcon>
         <div style={{ width: "100%" }}>
           <Typography variant="h5">{medication.name}</Typography>
-          <div style={{width:'70%',display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+          <div style={{marginTop: '0.5rem',width:'70%',display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
             <Typography variant="body1">
                 <ScheduleIcon /> Dosage: {medication.dosage}
             </Typography>
             <Typography variant="body1">
-            <EventIcon /> Frequency: {medication.frequency}
+            <EventIcon />{medication.frequency}
           </Typography>
          </div>
           
-          <div style={{width:'70%', display:'flex', flexDirection: 'row',  justifyContent: 'space-between'}}>
+          <div style={{marginTop: '0.5rem', width:'70%', display:'flex', flexDirection: 'row',  justifyContent: 'space-between'}}>
                 <Typography variant="body1">
                     <EventIcon /> {medication.start_date}
                 </Typography>
@@ -105,11 +121,11 @@ const Medication = ({ medication }) => {
           {/* <Typography variant="body1">
             <PersonIcon /> Prescribed For: {medication.prescribed_for}
           </Typography> */}
-          {medication.side_effects && (
+          {/* {medication.side_effects && (
             <Typography variant="body1">
               <WarningIcon /> Side Effects: {medication.side_effects}
             </Typography>
-          )}
+          )} */}
         </div>
         <Divider />
       </ListItem>

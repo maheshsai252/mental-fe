@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { API_BASE } from '../Constants';
 import { axiosRequest } from '../services/utils/axios';
 import MedicationPlanCreation from '../patient/CreateMedicationPlan';
+import MedicationPlan from '../patient/MedicationPlan';
 const OngoingSessionsPage = () => {
   const [sessions, setSessions] = useState([]);
   const [selectedTherapy, setSelectedTherapy] = useState(null);
@@ -14,7 +15,7 @@ const OngoingSessionsPage = () => {
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const response = await axiosRequest.get(`${API_BASE}/doc-therapy-sessions/`);
+        const response = await axiosRequest.get(`${API_BASE}/doc-therapy-sessions-today/`);
         console.log(response.data);
         setSessions(response.data);
       } catch (error) {
@@ -99,17 +100,22 @@ const OngoingSessionsPage = () => {
             border: '2px solid #000',
             boxShadow: 24,
             width: '90%',  // Set a maximum width for the modal
-            maxHeight: '90vh',  // Set a maximum height for the modal
+            minHeight: '70%',  // Set a maximum height for the modal
+            maxHeight: '90%', 
             overflowY: 'auto',  // Make the content area scrollable
-
             p: 4,
           }}
         >
-        <Button style={{position: 'fixed'}} onClick={handleCloseModal} color='primary'>END SESSION</Button>
+        <Button onClick={handleCloseModal} color='error'>Close</Button>
 
-          {selectedTherapy && (
+          {selectedTherapy?.medication_plan.length===0 && (
             <div style={{width : '90%'}}>
               <MedicationPlanCreation therapy={selectedTherapy} />
+            </div>
+          )}
+          {selectedTherapy?.medication_plan.length!==0 && (
+            <div style={{width : '90%'}}>
+              <MedicationPlan plan={selectedTherapy?.medication_plan?.[0]}/>
             </div>
           )}
         </Box>

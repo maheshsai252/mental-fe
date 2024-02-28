@@ -3,6 +3,7 @@ import { Button, TextField, Typography, Grid, Container } from '@mui/material';
 import './index.css';
 import AudioRecorder from './AudioRecorder';
 import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from 'react-router-dom';
 
 const MedicationPlanCreation = ({therapy}) => {
   const [medicationPlan, setMedicationPlan] = useState({
@@ -37,6 +38,7 @@ const MedicationPlanCreation = ({therapy}) => {
       },
     });
   };
+  const navigate = useNavigate();
 
   const handleAddMedicationSession = () => {
     setMedicationSessions([...medicationSessions, { ...medicationSession }]);
@@ -49,9 +51,9 @@ const MedicationPlanCreation = ({therapy}) => {
         medicationPlan.medications = medicationSessions;
         medicationPlan.therapy = therapy;
        
-        const response = await fetch(` https://mental-app-backend.onrender.com/api/create-medication/`, {
+        // const response = await fetch(` https://mental-app-backend.onrender.com/api/create-medication/`, {
 
-        // const response = await fetch(`http://localhost:8000/api/create-medication/`, {
+        const response = await fetch(`http://127.0.0.1:8000/api/create-medication/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,13 +61,10 @@ const MedicationPlanCreation = ({therapy}) => {
         
         body: JSON.stringify(medicationPlan),
       });
+      console.log(response);
 
-      if (response.ok) {
         console.log('Medication plan created successfully');
-        // You might want to handle the success case, e.g., redirecting or displaying a success message
-      } else {
-        console.error('Failed to create medication plan');
-      }
+        navigate('/doc-sessions');
     } catch (error) {
       console.error('Error occurred while creating medication plan:', error);
     }
@@ -149,10 +148,10 @@ console.log(FREQUENCY_CHOICES)
                 {session.medicationDetails.end_date && (
                   <p>End Date: {session.medicationDetails.end_date}</p>
                 )}
-                <p>Prescribed For: {session.medicationDetails.prescribed_for}</p>
+                {/* <p>Prescribed For: {session.medicationDetails.prescribed_for}</p>
                 {session.medicationDetails.side_effects && (
                   <p>Side Effects: {session.medicationDetails.side_effects}</p>
-                )}
+                )} */}
               </li>
             ))}
           </ul>
@@ -239,7 +238,7 @@ console.log(FREQUENCY_CHOICES)
             </Grid>
 
             {/* Medication Prescribed For */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 fullWidth
                 label='Prescribed For'
@@ -247,10 +246,10 @@ console.log(FREQUENCY_CHOICES)
                 value={medicationSession.medicationDetails.prescribed_for}
                 onChange={(e) => handleMedicationDetailChange('prescribed_for', e.target.value)}
               />
-            </Grid>
+            </Grid> */}
 
             {/* Medication Side Effects */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 fullWidth
                 label='Side Effects'
@@ -260,7 +259,7 @@ console.log(FREQUENCY_CHOICES)
               />
             </Grid>
            
-            
+             */}
           </Grid>
           <div style={{margin:'1rem', textAlign: 'center', display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
             <Button variant='contained' color='error' onClick={() => setAddSession(false)}>
